@@ -1,46 +1,54 @@
 package com.hencoder.hencoderpracticedraw7.practice;
 
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.content.Context;
+import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
-
 import com.hencoder.hencoderpracticedraw7.R;
 
 public class Practice04PropertyValuesHolderLayout extends RelativeLayout {
-    View view;
-    Button animateBt;
+  View view;
+  Button animateBt;
 
-    public Practice04PropertyValuesHolderLayout(Context context) {
-        super(context);
-    }
+  public Practice04PropertyValuesHolderLayout(Context context) {
+    super(context);
+  }
 
-    public Practice04PropertyValuesHolderLayout(Context context, AttributeSet attrs) {
-        super(context, attrs);
-    }
+  public Practice04PropertyValuesHolderLayout(Context context, AttributeSet attrs) {
+    super(context, attrs);
+  }
 
-    public Practice04PropertyValuesHolderLayout(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-    }
+  public Practice04PropertyValuesHolderLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    super(context, attrs, defStyleAttr);
+  }
 
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
+  @Override
+  protected void onAttachedToWindow() {
+    super.onAttachedToWindow();
 
-        view = findViewById(R.id.objectAnimatorView);
-        animateBt = (Button) findViewById(R.id.animateBt);
+    view = findViewById(R.id.objectAnimatorView);
+    animateBt = (Button) findViewById(R.id.animateBt);
 
-        animateBt.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 使用 PropertyValuesHolder.ofFloat() 来创建不同属性的动画值方案
-                // 第一个： scaleX 从 0 到 1
-                // 第二个： scaleY 从 0 到 1
-                // 第三个： alpha 从 0 到 1
+    animateBt.setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        // 使用 PropertyValuesHolder.ofFloat() 来创建不同属性的动画值方案
+        // 第一个： scaleX 从 0 到 1
+        // 第二个： scaleY 从 0 到 1
+        // 第三个： alpha 从 0 到 1
 
-                // 然后，用 ObjectAnimator.ofPropertyValuesHolder() 把三个属性合并，创建 Animator 然后执行
-            }
-        });
-    }
+        PropertyValuesHolder holderScaleX = PropertyValuesHolder.ofFloat("scaleX", 0f, 1.0f);
+        PropertyValuesHolder holderScaleY = PropertyValuesHolder.ofFloat("scaleY", 0f, 1.0f);
+        PropertyValuesHolder holderAlpha = PropertyValuesHolder.ofFloat("alpha", 0f, 1.0f);
+        // 然后，用 ObjectAnimator.ofPropertyValuesHolder() 把三个属性合并，创建 Animator 然后执行
+        ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(view, holderScaleX, holderScaleY, holderAlpha);
+        animator.setInterpolator(new FastOutSlowInInterpolator());
+        animator.start();
+      }
+    });
+  }
 }

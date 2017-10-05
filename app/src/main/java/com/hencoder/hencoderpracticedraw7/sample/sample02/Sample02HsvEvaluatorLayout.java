@@ -48,9 +48,9 @@ public class Sample02HsvEvaluatorLayout extends RelativeLayout {
     }
 
     private class HsvEvaluator implements TypeEvaluator<Integer> {
-        float[] startHsv = new float[3];
-        float[] endHsv = new float[3];
-        float[] outHsv = new float[3];
+            float[] startHsv = new float[3];
+            float[] endHsv = new float[3];
+            float[] outHsv = new float[3];
 
         @Override
         public Integer evaluate(float fraction, Integer startValue, Integer endValue) {
